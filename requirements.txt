@@ -1,0 +1,6 @@
+# Azure Functions Core Dependencies
+azure-functions==1.18.0
+azure-functions-worker==1.0.0
+
+# Additional Azure Functions Dependencies for better performance
+azure-functions-worker[grpc]==1.0.0
