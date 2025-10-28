@@ -1,0 +1,9 @@
+# Azure Functions Core Dependencies
+azure-functions==1.18.0
+# OBS: azure-functions-worker é gerenciado automaticamente pelo runtime no Azure
+# Não é necessário incluir manualmente no requirements.txt
+ 
+# GRPC atualizado e compatível com Python 3.9+
+grpcio>=1.64.0
+grpcio-tools>=1.64.0
+protobuf>=4.25.0
