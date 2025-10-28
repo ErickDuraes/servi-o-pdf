@@ -5,6 +5,8 @@ azure-functions-worker==1.0.0
 
 # PDF Processing
 PyMuPDF==1.24.9
+reportlab==4.0.9
+Werkzeug==3.0.1
 
 # Additional Azure Functions Dependencies for better performance
 azure-functions-worker[grpc]==1.0.0

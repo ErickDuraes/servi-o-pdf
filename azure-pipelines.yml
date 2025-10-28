@@ -1,0 +1,44 @@
+# Azure Pipeline para Deploy Automático
+# Este arquivo é criado automaticamente pelo Azure Portal
+# ao configurar o Deployment Center
+
+trigger:
+  branches:
+    include:
+      - main
+      - feature/pdffunction
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  pythonVersion: '3.11'
+
+steps:
+# Instalar Python
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(pythonVersion)'
+
+# Instalar dependências
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Instalar dependências'
+
+# Preparar arquivos para deploy
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+# Publicar artefato
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
